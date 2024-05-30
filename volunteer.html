@@ -133,11 +133,16 @@
                     var deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Delete';
                     deleteButton.addEventListener('click', function() {
-                        // Remove the opportunity from the array and update localStorage
-                        volunteerOpportunities.splice(volunteerOpportunities.indexOf(opportunity), 1);
-                        localStorage.setItem('volunteerOpportunities', JSON.stringify(volunteerOpportunities));
-                        // Update the table
-                        updateTable();
+                        var password = prompt('Please enter the password:');
+                        if (password === 'tajol') {
+                            // Remove the opportunity from the array and update localStorage
+                            volunteerOpportunities.splice(volunteerOpportunities.indexOf(opportunity), 1);
+                            localStorage.setItem('volunteerOpportunities', JSON.stringify(volunteerOpportunities));
+                            // Update the table
+                            updateTable();
+                        } else {
+                            alert('Incorrect password. Deletion aborted.');
+                        }
                     });
 
                     // Append delete button to the row
@@ -157,8 +162,6 @@
                     phone_number: volunteerForm.phone_number.value,
                     location: volunteerForm.location.value
                 };
-                // Add new
-<!--Continuation of the JavaScript-->
                 // Add new opportunity to the array
                 volunteerOpportunities.push(formData);
                 // Update localStorage
