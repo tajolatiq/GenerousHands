@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer - GenerousHands</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>GenerousHands</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="donations.html">Donations</a></li>
+                <li><a href="requests.html">Requests</a></li>
+                <li><a href="volunteer.html">Volunteer</a></li>
+                <li><a href="success_stories.html">Success Stories</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section>
+            <h2>Request Help</h2>
+            <form id="volunteerForm">
+                <label for="item_name">Name:</label>
+                <input type="text" id="item_name" name="item_name" required>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                <label for="contact_email">Contact Email:</label>
+                <input type="email" id="contact_email" name="contact_email" required>
+                <label for="phone_number">Phone Number:</label>
+                <input type="tel" id="phone_number" name="phone_number" required>
+                <label for="location">Location:</label>
+                <select id="location" name="location" required>
+                    <option value="Johor">Johor</option>
+                    <option value="Kedah">Kedah</option>
+                    <option value="Kelantan">Kelantan</option>
+                    <option value="Kuala Lumpur">Kuala Lumpur</option>
+                    <option value="Labuan">Labuan</option>
+                    <option value="Melaka">Melaka</option>
+                    <option value="Negeri Sembilan">Negeri Sembilan</option>
+                    <option value="Pahang">Pahang</option>
+                    <option value="Perak">Perak</option>
+                    <option value="Perlis">Perlis</option>
+                    <option value="Pulau Pinang">Pulau Pinang</option>
+                    <option value="Sabah">Sabah</option>
+                    <option value="Sarawak">Sarawak</option>
+                    <option value="Selangor">Selangor</option>
+                    <option value="Terengganu">Terengganu</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+		<br>
+        <hr>
+		<br>
+        <section>
+            <h2>Volunteering Opportunities</h2>
+			<br>
+            <!-- Dropdown menu for location selection -->
+            <label for="locationFilter">Filter by Location:</label>
+			<br>
+            <select id="locationFilter">
+			<br>
+			<br>
+                <option value="all">All</option>		
+                <option value="Johor">Johor</option>
+                <option value="Kedah">Kedah</option>
+                <option value="Kelantan">Kelantan</option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Labuan">Labuan</option>
+                <option value="Melaka">Melaka</option>
+                <option value="Negeri Sembilan">Negeri Sembilan</option>
+                <option value="Pahang">Pahang</option>
+                <option value="Perak">Perak</option>
+                <option value="Perlis">Perlis</option>
+                <option value="Pulau Pinang">Pulau Pinang</option>
+                <option value="Sabah">Sabah</option>
+                <option value="Sarawak">Sarawak</option>
+                <option value="Selangor">Selangor</option>
+                <option value="Terengganu">Terengganu</option>
+            </select>
+            <div id="volunteerOpportunitiesContainer">
+			<br>
+                <!-- Volunteer opportunities entries will be appended here -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Contact Email</th>
+                            <th>Phone Number</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="volunteerOpportunitiesTableBody"></tbody>
+                </table>
+            </div>
+			<br>
+			<br>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 GenerousHands. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var volunteerForm = document.getElementById('volunteerForm');
+            var volunteerOpportunitiesTableBody = document.getElementById('volunteerOpportunitiesTableBody');
+            var volunteerOpportunities = JSON.parse(localStorage.getItem('volunteerOpportunities')) || [];
+
+            // Function to update the table with volunteer opportunities
+            function updateTable() {
+                volunteerOpportunitiesTableBody.innerHTML = ''; // Clear previous data
+                volunteerOpportunities.forEach(function(opportunity) {
+                    var row = volunteerOpportunitiesTableBody.insertRow();
+                    row.insertCell().textContent = opportunity.item_name;
+                    row.insertCell().textContent = opportunity.description;
+                    row.insertCell().textContent = opportunity.contact_email;
+                    row.insertCell().textContent = opportunity.phone_number;
+                    row.insertCell().textContent = opportunity.location;
+
+                    // Create delete button for each row
+                    var deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.addEventListener('click', function() {
+                        // Remove the opportunity from the array and update localStorage
+                        volunteerOpportunities.splice(volunteerOpportunities.indexOf(opportunity), 1);
+                        localStorage.setItem('volunteerOpportunities', JSON.stringify(volunteerOpportunities));
+                        // Update the table
+                        updateTable();
+                    });
+
+                    // Append delete button to the row
+                    var cell = row.insertCell();
+                    cell.appendChild(deleteButton);
+                });
+            }
+
+            // Function to handle form submission
+            volunteerForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                // Collect form data
+                var formData = {
+                    item_name: volunteerForm.item_name.value,
+                    description: volunteerForm.description.value,
+                    contact_email: volunteerForm.contact_email.value,
+                    phone_number: volunteerForm.phone_number.value,
+                    location: volunteerForm.location.value
+                };
+                // Add new
+<!--Continuation of the JavaScript-->
+                // Add new opportunity to the array
+                volunteerOpportunities.push(formData);
+                // Update localStorage
+                localStorage.setItem('volunteerOpportunities', JSON.stringify(volunteerOpportunities));
+                // Update the table
+                updateTable();
+                // Reset the form
+                volunteerForm.reset();
+            });
+
+            // Initial table update
+            updateTable();
+        });
+    </script>
+</body>
+</html>

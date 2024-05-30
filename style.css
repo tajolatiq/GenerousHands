@@ -1,0 +1,117 @@
+/* External stylesheet for common styles */
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Reset default list styles */
+nav {
+    background-color: #333; /* Background color of the navigation bar */
+    padding: 10px 0; /* Add padding to the top and bottom */
+}
+
+nav ul {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-around; /* Distribute items evenly */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-right: 20px; /* Add spacing between list items */
+}
+
+nav ul li:last-child {
+    margin-right: 0; /* Remove margin from the last list item */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* Text color of the links */
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff5733; /* Change color on hover */
+}
+
+
+footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0; /* Background color for the footer */
+    padding: 10px; /* Add padding for better spacing */
+    text-align: center; /* Center-align the text */
+    font-size: 14px; /* Adjust font size */
+    color: #666; /* Text color */
+}
+
+footer.about-footer {
+    position: relative;
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+
+.main-content {
+    padding: 2rem;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+
+
+img[src="Furkan Güzlek used sofa.jpg"] {
+    width: 30%;
+	
+}
+
+img[src="Suzy Hazelwood old book.jpg"] {
+    width: 33.5%;
+
+}
+
+#RequestsContainer {
+    margin: 0 auto; /* Center the container horizontally */
+    width: 40%; /* Set a width for the container */
+}
+
+#donationsContainer {
+    margin: 0 auto; /* Center the container horizontally */
+    width: 40%; /* Set a width for the container */
+}
+
+#StoryContainer {
+    margin: 0 auto; /* Center the container horizontally */
+    width: 20%; /* Set a width for the container */
+}
+
+#volunteerOpportunitiesContainer {
+    margin: 0 auto; /* Center the container horizontally */
+    width: 30%; /* Set a width for the container */
+}
