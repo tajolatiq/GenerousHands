@@ -124,23 +124,23 @@ img[src="Suzy Hazelwood old book.jpg"] {
 }
 
 #RequestsContainer {
-    margin: 0 auto; /* Center the container horizontally */
-    width: 100%; /* Make the container span the full width of the page */
-    max-width: 800px; /* Limit the maximum width to prevent the table from becoming too wide on larger screens */
+    margin: 0 auto;
+    width: 100%; 
+    max-width: 800px;
 	
 }
 
 #donationsContainer {
-    margin: 0 auto; /* Center the container horizontally */
-    width: 100%; /* Make the container span the full width of the page */
-    max-width: 800px; /* Limit the maximum width to prevent the table from becoming too wide on larger screens */
+    margin: 0 auto;
+    width: 100%; 
+    max-width: 800px; 
 }
 
 
 #StoryContainer {
-   margin: 0 auto; /* Center the container horizontally */
-    width: 100%; /* Make the container span the full width of the page */
-    max-width: 300px; /* Limit the maximum width to prevent the table from becoming too wide on larger screens */
+   margin: 0 auto; 
+    width: 100%; 
+    max-width: 300px; 
 }
 
 #volunteerOpportunitiesContainer {
