@@ -2,30 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Requests - GenerousHands</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>GenerousHands</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>GenerousHands</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="donations.html">Donations</a></li>
-                <li><a href="requests.html">Requests</a></li>
-                <li><a href="volunteer.html">Volunteer</a></li>
-                <li><a href="success_stories.html">Success Stories</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="btnnav">Home</a></li>
+                    <li><a href="about.html" class="btnnav">About Us</a></li>
+                    <li><a href="donations.html" class="btnnav">Donations</a></li>
+                    <li><a href="requests.html" class="btnnav">Requests</a></li>
+                    <li><a href="volunteer.html" class="btnnav">Volunteer</a></li>
+                    <li><a href="success_stories.html" class="btnnav">Success Stories</a></li>
+                    <li><a href="faq.html" class="btnnav">FAQ</a></li>
+                    <li><a href="contact.html" class="btnnav">Contact Us</a></li>
+                    <li><a href="login.html" class="btnnav">Login</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main class="main-content">
-        <section>
+        <section class="submitrequest">
             <h2>Submit a Request</h2>
             <form id="RequestForm">
                 <label for="item_request">Item request:</label>
@@ -50,10 +52,10 @@
                 <button type="submit">Submit</button>
             </form>
         </section>
-        
-        <section>
+        <br>
+        <hr>
+        <section class="requesttable">
             <h2>Requests</h2>
-            <!-- Dropdown menu for category selection -->
             <label for="categoryFilter">Filter by Category:</label>
             <select id="categoryFilter">
                 <option value="all">All</option>
@@ -67,7 +69,6 @@
                 <option value="other">Other</option>
             </select>
             <div id="RequestsContainer">
-                <!-- Requests entries will be appended here -->
                 <table>
                     <thead>
                         <tr>
@@ -84,6 +85,10 @@
             </div>
         </section>
     </main>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <footer>
         <p>&copy; 2024 GenerousHands. All rights reserved.</p>
@@ -95,7 +100,6 @@
             var Requests = JSON.parse(localStorage.getItem('Requests')) || [];
             var adminPassword = 'tajol'; // Change this to your desired admin password
 
-            // Function to display Requests based on selected category
             function displayRequests(selectedCategory) {
                 RequestsTableBody.innerHTML = ''; // Clear previous Requests
                 Requests.forEach(function(request, index) {
@@ -107,17 +111,13 @@
                         row.insertCell().textContent = request.phone_number;
                         row.insertCell().textContent = request.category;
 
-                        // Create delete button
                         var deleteButton = document.createElement('button');
                         deleteButton.textContent = 'Delete';
                         deleteButton.addEventListener('click', function() {
                             var enteredPassword = prompt('Enter Admin Password:');
                             if (enteredPassword === adminPassword) {
-                                // Remove the request entry from Requests array
                                 Requests.splice(index, 1);
-                                // Update local storage
                                 localStorage.setItem('Requests', JSON.stringify(Requests));
-                                // Redisplay Requests
                                 displayRequests(selectedCategory);
                             } else {
                                 alert('Incorrect password. Deletion canceled.');
@@ -129,25 +129,21 @@
                 });
             }
 
-            // Initial display of all Requests
             displayRequests('all');
 
-            // Event listener for category filter change
             document.getElementById('categoryFilter').addEventListener('change', function(event) {
                 var selectedCategory = event.target.value;
                 displayRequests(selectedCategory);
             });
 
-            // Form submission handler
             document.getElementById('RequestForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission behavior
+                event.preventDefault();
                 var itemRequest = document.getElementById('item_request').value;
                 var description = document.getElementById('description').value;
                 var contactEmail = document.getElementById('contact_email').value;
                 var phoneNumber = document.getElementById('phone_number').value;
                 var category = document.getElementById('category').value;
 
-                // Create a new request object
                 var newRequest = {
                     item_request: itemRequest,
                     description: description,
@@ -156,16 +152,9 @@
                     category: category
                 };
 
-                // Add the new request to the Requests array
                 Requests.push(newRequest);
-
-                // Update local storage with the new Requests array
                 localStorage.setItem('Requests', JSON.stringify(Requests));
-
-                // Redisplay Requests
                 displayRequests('all');
-
-                // Clear the form fields
                 document.getElementById('RequestForm').reset();
             });
         });
